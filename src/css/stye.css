@@ -5,14 +5,18 @@ body {
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 40px;
-  column-gap: 35px;
-  margin-left: 35px;
+  padding: 12px 0;
+  justify-content: center;
   margin-bottom: 45px;
 }
 
+img:hover {
+  transform: scale(1.1);
+}
 img {
-  display: block;
+  transition: transform 400ms ease-out;
+  height: 100%;
+  width: 100%;
 }
 
 .search-form {
@@ -110,6 +114,10 @@ button {
   border: 1px solid #f4f4fd;
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+  height: 400px;
+  width: 400px;
+  margin: 5px;
+  overflow: hidden;
 }
 
 .text {
