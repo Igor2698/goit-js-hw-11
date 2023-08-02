@@ -61,6 +61,7 @@ async function handlerSubmitForm(event) {
     // Ініціюю створення бібліотеки галереї
     refs.Div.addEventListener('click', clickOnImage);
   } catch (error) {
+    console.log(error);
     Notiflix.Notify.failure('Something went wrong, please reload page.');
   }
 }
@@ -108,6 +109,7 @@ function renderPage(value) {
 
 function isEmptyValue(length) {
   if (length === 0) {
+    console.log(error);
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
