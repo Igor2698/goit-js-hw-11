@@ -1,5 +1,5 @@
 export default function createString(arraysWithImg) {
-  return (markup = arraysWithImg
+  return arraysWithImg
     .map(
       ({
         webformatURL,
@@ -30,5 +30,5 @@ export default function createString(arraysWithImg) {
           `;
       }
     )
-    .join(''));
+    .join('');
 }
