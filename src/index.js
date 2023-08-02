@@ -77,7 +77,7 @@ function isLoading(value) {
   }
 }
 // Створюю нескінченний скрол
-const throttledScrollGalery = throttle(scrollGalery, 300);
+const throttledScrollGalery = throttle(scrollGalery, 500);
 window.addEventListener('scroll', throttledScrollGalery);
 // Функція виконується коли скрол наближується до кінця сторінки
 async function scrollGalery() {
