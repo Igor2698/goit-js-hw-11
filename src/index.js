@@ -56,10 +56,8 @@ async function handlerSubmitForm(event) {
     // Зберігаю максимальне значення page, яке можна завантажити на сторінку
     imagesApiService.totalPages = amountOfImages / imagesApiService.limit;
     renderPage(date);
-    // Зберігаю у змінну значення, яке дорівнює довжині елементів масиву (воно буде нульове, якщо значення в інпуті некоректне)
-    const lengthOfDates = date.hits.length;
     // Викликаю функцію, яка перевірятиме, чи коректне значення введено в інпут. Якщо ні, то виводимо відповідне повідомлення
-    isEmptyValue(lengthOfDates);
+    isEmptyValue(amountOfImages);
     // Ініціюю створення бібліотеки галереї
     refs.Div.addEventListener('click', clickOnImage);
   } catch (error) {
