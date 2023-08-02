@@ -110,33 +110,10 @@ function renderPage(value) {
 
 function isEmptyValue(length) {
   if (length === 0) {
-    console.log(error);
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
-    return;
+  } else {
+    Notiflix.Notify.success(`Hooray! We found ${amountOfImages} images`);
   }
-  Notiflix.Notify.success(`Hooray! We found ${amountOfImages} images`);
 }
-// Функція виконується по кліку на кнопку "Load more"
-// function onLoadMore() {
-//   imagesApiService.incrementPage();
-//   imagesApiService.getImages(imagesApiService.query).then(date => {
-//     renderPage(date.hits);
-
-//     if (imagesApiService.page > imagesApiService.totalPages) {
-//       hiddenloadMoreButton(true);
-//       Notiflix.Notify.failure(
-//         "We're sorry, but you've reached the end of search results."
-//       );
-//     }
-//   });
-// }
-
-// function hiddenloadMoreButton(indicate) {
-//   if (indicate) {
-//     refs.loadMoreButton.style.display = 'none';
-//   } else {
-//     refs.loadMoreButton.style.display = 'flex';
-//   }
-// }

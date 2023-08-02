@@ -18,6 +18,7 @@ export default class ImagesApiService {
   async getImages(value) {
     const url = `${keys.BASE_URL}?${searchParams}&q=${value}&page=${this.page}`;
     try {
+      console.log(url);
       const response = await axios.get(url);
       return response.data;
     } catch (error) {
