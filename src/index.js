@@ -43,6 +43,7 @@ async function handlerSubmitForm(event) {
     isLoading(false);
     return;
   }
+
   // При кожному натисканні на кнопку Search скидаю значення page до 1
   imagesApiService.resetPage();
   // При кожному натисканні на кнопку Search очищую сторінку
@@ -59,7 +60,8 @@ async function handlerSubmitForm(event) {
     // Викликаю функцію, яка перевірятиме, чи коректне значення введено в інпут. Якщо ні, то виводимо відповідне повідомлення
     isEmptyValue(amountOfImages);
     // Ініціюю створення бібліотеки галереї
-    refs.Div.addEventListener('click', clickOnImage);
+
+    window.addEventListener('scroll', throttledScrollGalery);
   } catch (error) {
     console.log(error);
     Notiflix.Notify.failure('Something went wrong, please reload page.');
@@ -78,7 +80,6 @@ function isLoading(value) {
 }
 // Створюю нескінченний скрол
 const throttledScrollGalery = throttle(scrollGalery, 500);
-window.addEventListener('scroll', throttledScrollGalery);
 // Функція виконується коли скрол наближується до кінця сторінки
 async function scrollGalery() {
   const documentRect = document.documentElement.getBoundingClientRect();
