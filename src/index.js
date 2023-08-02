@@ -60,7 +60,7 @@ async function handlerSubmitForm(event) {
     // Викликаю функцію, яка перевірятиме, чи коректне значення введено в інпут. Якщо ні, то виводимо відповідне повідомлення
     isEmptyValue(amountOfImages);
     // Ініціюю створення бібліотеки галереї
-
+    refs.Div.addEventListener('click', clickOnImage);
     window.addEventListener('scroll', throttledScrollGalery);
   } catch (error) {
     console.log(error);
