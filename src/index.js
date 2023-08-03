@@ -94,7 +94,7 @@ async function scrollGalery() {
       // Робимо перевірку - якщо користувач доскролив до кінця сторінки, виводимо повідомлення
       if (
         imagesApiService.page >= imagesApiService.totalPages &&
-        date.totalHits > imagesApiService.limit
+        date.totalHits >= imagesApiService.limit
       ) {
         Notiflix.Notify.failure(
           "We're sorry, but you've reached the end of search results."
