@@ -1,6 +1,6 @@
 const refs = {
-  Form: document.querySelector('.search-form'),
-  Div: document.querySelector('.gallery'),
+  form: document.querySelector('.search-form'),
+  galery: document.querySelector('.gallery'),
   loadMoreButton: document.querySelector('.load-more'),
   spiner: document.querySelector('.loader'),
 };

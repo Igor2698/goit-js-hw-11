@@ -27,7 +27,7 @@ isLoading(false);
 // Створюю новий об'єкт на основі класу ImagesApiService
 const imagesApiService = new ImagesApiService();
 // Додаю слухачі подій
-refs.Form.addEventListener('submit', handlerSubmitForm);
+refs.form.addEventListener('submit', handlerSubmitForm);
 // refs.loadMoreButton.addEventListener('click', onLoadMore);
 
 // Функція виконується при натисканні кнопки "Search""
@@ -39,7 +39,7 @@ async function handlerSubmitForm(event) {
   isLoading(true);
   if (imagesApiService.query === '') {
     Notiflix.Notify.failure('Please enter a value');
-    refs.Div.innerHTML = '';
+    refs.galery.innerHTML = '';
     isLoading(false);
     return;
   }
@@ -47,7 +47,7 @@ async function handlerSubmitForm(event) {
   // При кожному натисканні на кнопку Search скидаю значення page до 1
   imagesApiService.resetPage();
   // При кожному натисканні на кнопку Search очищую сторінку
-  refs.Div.innerHTML = '';
+  refs.galery.innerHTML = '';
 
   try {
     const date = await imagesApiService.getImages(imagesApiService.query);
@@ -58,9 +58,9 @@ async function handlerSubmitForm(event) {
     imagesApiService.totalPages = amountOfImages / imagesApiService.limit;
     renderPage(date);
     // Викликаю функцію, яка перевірятиме, чи коректне значення введено в інпут. Якщо ні, то виводимо відповідне повідомлення
-    isEmptyValue(amountOfImages);
+    isEmptyValue(amountOfImages, date);
     // Ініціюю створення бібліотеки галереї
-    refs.Div.addEventListener('click', clickOnImage);
+    refs.galery.addEventListener('click', clickOnImage);
     window.addEventListener('scroll', throttledScrollGalery);
   } catch (error) {
     console.log(error);
@@ -71,10 +71,10 @@ async function handlerSubmitForm(event) {
 // Функція-індикатор процесу завантаження данних-в залежності від стану, ховаємо або демонструємо данні та спінер завантаження
 function isLoading(value) {
   if (value) {
-    refs.Form.classList.add('hidden');
+    refs.form.classList.add('hidden');
     refs.spiner.classList.remove('hidden');
   } else {
-    refs.Form.classList.remove('hidden');
+    refs.form.classList.remove('hidden');
     refs.spiner.classList.add('hidden');
   }
 }
@@ -88,10 +88,14 @@ async function scrollGalery() {
       // Збільшуємо значення page на 1 при кожному виклику функції
       imagesApiService.incrementPage();
       const date = await imagesApiService.getImages(imagesApiService.query);
+
       renderPage(date);
 
       // Робимо перевірку - якщо користувач доскролив до кінця сторінки, виводимо повідомлення
-      if (imagesApiService.page >= imagesApiService.totalPages) {
+      if (
+        imagesApiService.page >= imagesApiService.totalPages &&
+        date.totalHits > imagesApiService.limit
+      ) {
         Notiflix.Notify.failure(
           "We're sorry, but you've reached the end of search results."
         );
@@ -105,14 +109,18 @@ async function scrollGalery() {
 
 function renderPage(value) {
   const string = createString(value.hits);
-  refs.Div.insertAdjacentHTML('beforeend', string);
+  refs.galery.insertAdjacentHTML('beforeend', string);
 }
-
-function isEmptyValue(length) {
+// Функція, яка демонструє користувачу стан завантаження - якщо значення в імпут введено невірно, буде виведено прохання ввести інше значення, або якщо буде введено менше ніж 40 картинок, про це також попереджаємо
+function isEmptyValue(length, arrays) {
   if (length === 0) {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
+    return;
+  } else if (arrays.totalHits < imagesApiService.limit) {
+    Notiflix.Notify.warning(`We found only ${arrays.totalHits} pictures`);
+    return;
   } else {
     Notiflix.Notify.success(`Hooray! We found ${amountOfImages} images`);
   }
