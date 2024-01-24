@@ -24,6 +24,12 @@
   -webkit-text-size-adjust: 100%;
 }
 
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: #f2f2f2;
+}
+
 .button {
   background-color: #3498db;
   color: #fff;
@@ -50,18 +56,18 @@
 }
 
 .input:focus {
-  border: 1px solid #2ab159; /* Задайте ваш цвет при фокусе */
+  border: 1px solid #2ab159;
 }
 
 .form {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  padding-top: 30px;
 }
 
 .gallery {
+  max-width: 1440px;
   display: grid;
-  /* max-width: 1140px; */
   grid-template-columns: repeat(4, minmax(320px, 1fr));
   grid-auto-rows: 300px;
   grid-gap: 12px;
@@ -70,7 +76,7 @@
   list-style: none;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .gallery-image {
